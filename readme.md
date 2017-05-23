@@ -77,4 +77,11 @@ update scripts section in package.json
 }
 ```
 
+run webpack throw npm
+```
+npm run dev
+npm run prod
+```
+
+
 
