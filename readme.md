@@ -1,7 +1,7 @@
 #webpack2-labs
 
 
-###Lab1 - Installation and Config https://www.youtube.com/watch?v=JdGnYNtuEtE&list=PLkEZWD8wbltnRp6nRR8kv97RbpcUdNawY
+###Lab1 - Installation and Config www.youtube.com/watch?v=JdGnYNtuEtE&list=PLkEZWD8wbltnRp6nRR8kv97RbpcUdNawY
 
 Check
 ```
@@ -77,4 +77,39 @@ update scripts section in package.json
 }
 ```
 
+###lab2 - HTML Webpack Plugin www.youtube.com/watch?v=cKTDYSK0ArI&list=PLkEZWD8wbltnRp6nRR8kv97RbpcUdNawY&index=2
 
+create ./dist/index.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project</title>
+</head>
+<body>
+<p>Content goes here.</p>
+
+<script src="app.bundle.js"></script>
+</body>
+</html>
+```
+
+install HTML plugin https://www.npmjs.com/package/html-webpack-plugin
+```
+npm i html-webpack-plugin --save-dev
+```
+
+update webpack.config.json
+```javascript
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+    entry: './src/app.js',
+    output: {
+        path: 'dist',
+        filename: 'app.bundle.js'
+    },
+    plugins: [new HtmlWebpackPlugin()]
+};
+```
