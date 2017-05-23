@@ -67,7 +67,7 @@ update scripts section in package.json
   "main": "index.js",
   "scripts": {
     "dev": "webpack -d --watch",
-    "prod": "webpack -p",
+    "prod": "webpack -p"
   },
   "author": "Kirill Pisarenko",
   "license": "ISC",
