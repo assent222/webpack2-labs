@@ -408,3 +408,7 @@ module.exports = {
 ```
 
 in case of errors kindly check https://webpack.js.org/guides/migrating/ and versions
+
+###lab4 - Webpack 2 with Webpack Dev Server - https://www.youtube.com/watch?v=gH4LxB6NkNc
+see http://webpack.github.io/
+see https://webpack.js.org/configuration/dev-server/
