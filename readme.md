@@ -411,4 +411,29 @@ in case of errors kindly check https://webpack.js.org/guides/migrating/ and vers
 
 ###lab4 - Webpack 2 with Webpack Dev Server - https://www.youtube.com/watch?v=gH4LxB6NkNc
 see http://webpack.github.io/
+
 see https://webpack.js.org/configuration/dev-server/
+
+4.1. install webpack-dev-server
+```
+npm install webpack-dev-server --save-dev -D
+```
+4.2. update webpack.config.js
+```javascript
+devServer: {
+    contentBase: path.join(__dirname, "dist"),
+    watchContentBase: true
+}
+```
+4.3. update package.json
+```json
+"scripts": {
+    "web": "webpack-dev-server",
+    "dev": "webpack -d",
+    "prod": "webpack -p"
+}
+```
+4.4. run dev-server
+```
+npm run web
+```

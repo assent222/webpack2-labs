@@ -10,7 +10,10 @@ module.exports = {
     },
     module: {
         rules: [
-            {test: /\.scss$/, use: ExtractTextPlugin.extract({fallback: 'style-loader', use: ['css-loader', 'sass-loader']})}
+            {
+                test: /\.scss$/,
+                use: ExtractTextPlugin.extract({fallback: 'style-loader', use: ['css-loader', 'sass-loader']})
+            }
         ]
     },
     plugins: [
@@ -20,6 +23,10 @@ module.exports = {
             content: 'Content placed here.',
             template: './src/index.html',
             filename: 'my-index.html'
-        })]
+        })],
+    devServer: {
+        contentBase: path.join(__dirname, "dist"),
+        watchContentBase: true
+    }
 };
 
