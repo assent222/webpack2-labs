@@ -1,7 +1,7 @@
 #webpack2-labs
 
 
-###Lab1 - Installation and Config www.youtube.com/watch?v=JdGnYNtuEtE&list=PLkEZWD8wbltnRp6nRR8kv97RbpcUdNawY
+###Lab1 - Installation and Config https://www.youtube.com/watch?v=JdGnYNtuEtE&list=PLkEZWD8wbltnRp6nRR8kv97RbpcUdNawY
 
 Check
 ```
@@ -76,6 +76,13 @@ update scripts section in package.json
   }
 }
 ```
+
+run webpack throw npm
+```
+npm run dev
+npm run prod
+```
+
 
 ###lab2 - HTML Webpack Plugin www.youtube.com/watch?v=cKTDYSK0ArI&list=PLkEZWD8wbltnRp6nRR8kv97RbpcUdNawY&index=2
 
