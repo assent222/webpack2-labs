@@ -304,3 +304,5 @@ module.exports = {
     })]
 };
 ```
+
+### lab3 - Webpack 2 - Style, CSS and Sass loaders https://www.youtube.com/watch?v=m7V0OackwxY&t
