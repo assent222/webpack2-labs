@@ -306,3 +306,105 @@ module.exports = {
 ```
 
 ### lab3 - Webpack 2 - Style, CSS and Sass loaders https://www.youtube.com/watch?v=m7V0OackwxY&t
+
+3.1. read about loaders concept
+https://webpack.js.org/loaders/
+
+3.2. install css loader
+```
+npm i --save-dev css-loader
+```
+3.3 create ./src/app.css
+```css
+body {
+    background-color: pink;
+}
+```
+
+3.4. update webpack.config.js
+```javascript
+...
+module: {
+    rules: [
+        {test: /\.css$/, use: 'cs-loader'}
+    ]
+}
+...
+```
+3.5. update app.js to include css file
+```javascript
+var css = require(app.scss);
+console.log('hello from app.js! again');
+```
+
+3.6. run webpack and you will see that webpack include app.css into app.bundle.js
+to fix it you should install style-loader
+```
+npm i style-loader --save-dev
+```
+and update webpack.config.js
+```javascript
+module: {
+    rules: [
+        {test: /\.css$/, loaders: 'style-loader!css-loader'}
+    ]
+}
+```
+note this syntax 'style-loader!css-loader' is old style,
+use that one
+```javascript
+{test: /\.css$/, use: [ 'style-loader', 'css-loader' ]}
+```
+see https://webpack.js.org/guides/migrating/
+
+3.7. add sass loader
+```
+npm install sass-loader node-sass webpack --save-dev
+```
+rename app.css -> app.s.css and update
+```css
+body {
+    background-color: pink;
+    p {
+        color: red;
+    }
+}
+```
+update webpack.config.js
+```javascript
+{test: /\.scss$/, use: [ 'style-loader', 'css-loader', 'sass-loader' ]}
+```
+
+3.8 include css into files
+https://www.npmjs.com/package/extract-text-webpack-plugin
+```
+npm i extract-text-webpack-plugin --save-dev -D
+```
+```javascript
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var path = require('path');
+
+module.exports = {
+    entry: './src/app.js',
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'app.bundle.js'
+    },
+    module: {
+        rules: [
+            {test: /\.scss$/, use: ExtractTextPlugin.extract({fallback: 'style-loader', use: ['css-loader', 'sass-loader']})}
+        ]
+    },
+    plugins: [
+        new ExtractTextPlugin('style.css'),
+        new HtmlWebpackPlugin({
+            title: 'MyProject',
+            content: 'Content placed here.',
+            template: './src/index.html',
+            filename: 'my-index.html'
+        })]
+};
+```
+
+in case of errors kindly check https://webpack.js.org/guides/migrating/ and versions
