@@ -4,7 +4,7 @@
   "description": "webpack project starter",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack -d --watch",
+    "dev": "webpack -d",
     "prod": "webpack -p"
   },
   "author": "Kirill Pisarenko",
