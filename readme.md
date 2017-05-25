@@ -437,3 +437,18 @@ devServer: {
 ```
 npm run web
 ```
+
+4.5 configire dev-server
+https://www.youtube.com/watch?v=soI7X-7OSb4&list=PLkEZWD8wbltnRp6nRR8kv97RbpcUdNawY&index=5
+```javascript
+devServer: {
+    contentBase: path.join(__dirname, "dist"),
+    compress: true,
+    watchContentBase: true,//enable watching
+    open: true,//open browser on start
+    stats: 'errors-only'
+}
+```
+
+note: if you do not have index.html file in contentBase directory 
+then dew-server will show dir content instead of render html file

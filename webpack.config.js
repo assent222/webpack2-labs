@@ -22,11 +22,14 @@ module.exports = {
             title: 'MyProject',
             content: 'Content placed here.',
             template: './src/index.html',
-            filename: 'my-index.html'
+            filename: 'index.html'
         })],
     devServer: {
         contentBase: path.join(__dirname, "dist"),
-        watchContentBase: true
+        compress: true,
+        watchContentBase: true,//enable watching
+        open: true,//open browser on start
+        stats: 'errors-only'
     }
 };
 
