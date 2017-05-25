@@ -522,3 +522,74 @@ module: {
 ```
 
 ###lab7 - Multiple templates options and RimRaf - https://www.youtube.com/watch?v=OvjB2Sfq9ZU
+
+7.1. add rimraf support - clean dist folder before run webpack
+```json
+"scripts": {
+    "web": "webpack-dev-server",
+    "dev": "webpack -d",
+    "prod": "npm run clean && webpack -p",
+    "clean": "rimraf ./dist/*"
+}
+```
+
+7.2. add multiple templates
+
+7.2.1. create contact.html
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+<body>
+<div id="root"></div>
+</body>
+</html>
+```
+7.2.2. create contact.js
+```javascript
+const css = require('./app.scss');
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+ReactDOM.render(
+    <h1>Hello, contact page!</h1>,
+    document.getElementById('root')
+);
+```
+7.2.3. update webpack.config.js
+```javascript
+//update entry
+//was entry: './src/app.js'
+entry: {
+    app: './src/app.js',
+    contact: './src/contact.js'
+}
+```
+```javascript
+//update output, now for dinamic name
+output: {
+    filename: '[name].bundle.js' //was filename: 'app.bundle.js'
+}
+```
+```javascript
+//update plugin: add HtmlWebpackPlugin for contact.html template and excludeChunks due to without exclude the HtmlWebpackPlugin add all js scripts at each template
+ plugins: [
+     new ExtractTextPlugin('style.css'),
+     new HtmlWebpackPlugin({
+         title: 'App page',
+         template: './src/index.html',
+         filename: 'index.html',
+         excludeChunks: ['contact']
+     }),
+     new HtmlWebpackPlugin({
+         title: 'Cantact page',
+         template: './src/contact.html',
+         filename: 'contact.html',
+         excludeChunks: ['app']
+     })
+ ]
+```

@@ -3,10 +3,13 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var path = require('path');
 
 module.exports = {
-    entry: './src/app.js',
+    entry: {
+        app: './src/app.js',
+        contact: './src/contact.js'
+    },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'app.bundle.js'
+        filename: '[name].bundle.js'
     },
     module: {
         rules: [
@@ -24,11 +27,18 @@ module.exports = {
     plugins: [
         new ExtractTextPlugin('style.css'),
         new HtmlWebpackPlugin({
-            title: 'MyProject',
-            content: 'Content placed here.',
+            title: 'App page',
             template: './src/index.html',
-            filename: 'index.html'
-        })],
+            filename: 'index.html',
+            excludeChunks: ['contact']
+        }),
+        new HtmlWebpackPlugin({
+            title: 'Cantact page',
+            template: './src/contact.html',
+            filename: 'contact.html',
+            excludeChunks: ['app']
+        })
+    ],
     devServer: {
         contentBase: path.join(__dirname, "dist"),
         compress: true,

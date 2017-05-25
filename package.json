@@ -6,7 +6,8 @@
   "scripts": {
     "web": "webpack-dev-server",
     "dev": "webpack -d",
-    "prod": "webpack -p"
+    "prod": "npm run clean && webpack -p",
+    "clean": "rimraf ./dist/*"
   },
   "author": "Kirill Pisarenko",
   "license": "ISC",
