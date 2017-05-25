@@ -520,3 +520,5 @@ module: {
     ]
 }
 ```
+
+###lab7 - Multiple templates options and RimRaf - https://www.youtube.com/watch?v=OvjB2Sfq9ZU
