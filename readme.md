@@ -451,3 +451,72 @@ devServer: {
 
 note: if you do not have index.html file in contentBase directory 
 then dew-server will show dir content instead of render html file
+
+###lab6 - How to install React and Babel -  https://www.youtube.com/watch?v=zhA5LNA3MxE
+
+see https://facebook.github.io/react/docs/installation.html
+
+see https://codepen.io/gaearon/pen/rrpgNB?editors=0010
+
+see Create React App https://github.com/facebookincubator/create-react-app
+
+6.1. install react
+```
+npm i react react-dom -D --save-dev
+
+```
+6.2. install ES6 and JSX
+```
+npm i babel babel-preset-react babel-preset-es2015 -D --save-dev
+npm i babel-loader babel-core -D --save-dev
+```
+
+see configure WebStorm https://blog.jetbrains.com/webstorm/2015/05/ecmascript-6-in-webstorm-transpiling#babelfilewatcher
+
+6.3. configure babel http://babeljs.io/docs/setup/#installation
+
+6.3.1. create .babelrc
+```javascript
+{
+  presets: ['es2015', 'react']
+}
+```
+6.4. update app.js
+```javascript
+const css = require('./app.scss');
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+ReactDOM.render(
+    <h1>Hello, world!</h1>,
+    document.getElementById('root')
+);
+```
+
+6.5. update index.html - add #root + tab
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+<body>
+<div id="root"></div>
+</body>
+</html>
+
+```
+6.6. update webpack.config.js
+```javascript
+module: {
+    rules: [
+        {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: 'babel-loader'
+        }
+    ]
+}
+```
