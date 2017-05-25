@@ -438,8 +438,7 @@ devServer: {
 npm run web
 ```
 
-4.5 configire dev-server
-https://www.youtube.com/watch?v=soI7X-7OSb4&list=PLkEZWD8wbltnRp6nRR8kv97RbpcUdNawY&index=5
+###lab5 - configire dev-server https://www.youtube.com/watch?v=soI7X-7OSb4&list=PLkEZWD8wbltnRp6nRR8kv97RbpcUdNawY&index=5
 ```javascript
 devServer: {
     contentBase: path.join(__dirname, "dist"),
