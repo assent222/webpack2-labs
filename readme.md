@@ -632,3 +632,5 @@ plugins: [
 ],
 ```
 
+###lab10 - Production vs Development Environment - https://www.youtube.com/watch?v=NtyzJMi-a-M
+
