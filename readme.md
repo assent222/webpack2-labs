@@ -334,7 +334,7 @@ module: {
 3.5. update app.js to include css file
 ```javascript
 var css = require(app.scss);
-console.log('hello from app.js! again');
+console.log(app.js);
 ```
 
 3.6. run webpack and you will see that webpack include app.css into app.bundle.js
@@ -669,3 +669,13 @@ var exports = { ... };
 module.exports = exports;
 ```
 
+###lab11 - How to load images with Webpack 2 - https://www.youtube.com/watch?v=cDLfpth5a3s
+
+see https://www.npmjs.com/package/image-webpack-loader
+
+see https://www.npmjs.com/package/file-loader
+
+```
+npm install image-webpack-loader -D --save-dev
+npm install file-loader -D --save-dev
+```
