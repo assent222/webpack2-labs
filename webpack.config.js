@@ -3,7 +3,10 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var webpack = require("webpack");
 var path = require('path');
 
-module.exports = {
+var NODE_ENV = process.env.NODE_ENV || 'dev';
+var isProd = NODE_ENV != 'dev';
+
+var exports = {
     entry: {
         app: './src/app.js'
     },
@@ -14,10 +17,6 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.scss$/,
-                use: ['style-loader','css-loader', 'sass-loader']
-            },
-            {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: 'babel-loader'
@@ -25,14 +24,12 @@ module.exports = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin({filename: 'style.css}', disable: true, allChunks: true}),
         new HtmlWebpackPlugin({
             title: 'App page',
             template: './src/index.html',
-            filename: 'index.html'
-        }),
-        new webpack.HotModuleReplacementPlugin(), // enable HMR globally
-        new webpack.NamedModulesPlugin(), // prints more readable module names in the browser console on HMR updates
+            filename: 'index.html',
+            hash: true
+        })
     ],
     devServer: {
         contentBase: path.join(__dirname, "dist"),
@@ -44,3 +41,21 @@ module.exports = {
     }
 };
 
+//exclue ExtractTextPlugin from prod
+if (isProd) {
+    exports.module.rules.push({
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({fallback: 'style-loader', use: ['css-loader', 'sass-loader']})
+
+    });
+    exports.plugins.push(new ExtractTextPlugin({filename: 'style.css}', disable: false, allChunks: true}));
+} else {
+    exports.module.rules.push({
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
+    });
+    exports.plugins.push(new webpack.HotModuleReplacementPlugin());
+    exports.plugins.push(new webpack.NamedModulesPlugin());
+}
+
+module.exports = exports;

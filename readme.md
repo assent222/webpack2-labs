@@ -634,3 +634,38 @@ plugins: [
 
 ###lab10 - Production vs Development Environment - https://www.youtube.com/watch?v=NtyzJMi-a-M
 
+10.1. update package.json
+```json
+"prod": "npm run clean && set NODE_ENV=prod && webpack -p"
+```
+
+10.2. update webpack.config.js
+```javascript
+//read NODE_ENV
+var NODE_ENV = process.env.NODE_ENV || 'dev';
+var isProd = NODE_ENV != 'dev';
+
+//exclue ExtractTextPlugin from prod
+if (isProd) {
+    exports.module.rules.push({
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({fallback: 'style-loader', use: ['css-loader', 'sass-loader']})
+
+    });
+    exports.plugins.push(new ExtractTextPlugin({filename: 'style.css}', disable: false, allChunks: true}));
+} else {
+    exports.module.rules.push({
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
+    });
+    exports.plugins.push(new webpack.HotModuleReplacementPlugin());
+    exports.plugins.push(new webpack.NamedModulesPlugin());
+}
+
+//replace module.exports= to var exports
+//becouse in case of module.exports i cant use module.exports as variable
+var exports = { ... };
+
+module.exports = exports;
+```
+
