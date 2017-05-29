@@ -1,11 +1,11 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var webpack = require("webpack");
 var path = require('path');
 
 module.exports = {
     entry: {
-        app: './src/app.js',
-        contact: './src/contact.js'
+        app: './src/app.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -15,7 +15,7 @@ module.exports = {
         rules: [
             {
                 test: /\.scss$/,
-                use: ExtractTextPlugin.extract({fallback: 'style-loader', use: ['css-loader', 'sass-loader']})
+                use: ['style-loader','css-loader', 'sass-loader']
             },
             {
                 test: /\.js$/,
@@ -25,25 +25,21 @@ module.exports = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin('style.css'),
+        new ExtractTextPlugin({filename: 'style.css}', disable: true, allChunks: true}),
         new HtmlWebpackPlugin({
             title: 'App page',
             template: './src/index.html',
-            filename: 'index.html',
-            excludeChunks: ['contact']
+            filename: 'index.html'
         }),
-        new HtmlWebpackPlugin({
-            title: 'Cantact page',
-            template: './src/contact.html',
-            filename: 'contact.html',
-            excludeChunks: ['app']
-        })
+        new webpack.HotModuleReplacementPlugin(), // enable HMR globally
+        new webpack.NamedModulesPlugin(), // prints more readable module names in the browser console on HMR updates
     ],
     devServer: {
         contentBase: path.join(__dirname, "dist"),
         compress: true,
         watchContentBase: true,//enable watching
         open: true,//open browser on start
+        hot: true,
         stats: 'errors-only'
     }
 };

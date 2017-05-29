@@ -593,3 +593,42 @@ output: {
      })
  ]
 ```
+
+###lab9 - Hot Module Replacement - CSS - https://www.youtube.com/watch?v=faFJw1wjQLE
+
+see https://webpack.js.org/concepts/hot-module-replacement/
+
+see https://webpack.js.org/guides/hmr-react/
+
+9.0. remowe contact.js, contact.html from the project
+9.1. install react-hot-loader
+````
+npm i react-hot-loader@next -D --save-dev  
+````
+9.2. remove ExtractTextPlugin from webpack config due to react-hot-loader does not work with this plugin
+9.3. add var webpack
+```javascript
+var webpack = require("webpack");
+...
+
+module: {
+    rules: [
+        {
+            test: /\.scss$/,
+            use: ['style-loader','css-loader', 'sass-loader']
+        }
+    ]
+}
+...
+plugins: [
+    new ExtractTextPlugin({filename: 'style.css}', disable: true, allChunks: true}),
+    new HtmlWebpackPlugin({
+        title: 'App page',
+        template: './src/index.html',
+        filename: 'index.html'
+    }),
+    new webpack.HotModuleReplacementPlugin(), // enable HMR globally
+    new webpack.NamedModulesPlugin(), // prints more readable module names in the browser console on HMR updates
+],
+```
+
