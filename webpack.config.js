@@ -12,6 +12,7 @@ var exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
+        publicPath: 'dist',
         filename: '[name].bundle.js'
     },
     module: {
@@ -56,6 +57,12 @@ if (isProd) {
     });
     exports.plugins.push(new webpack.HotModuleReplacementPlugin());
     exports.plugins.push(new webpack.NamedModulesPlugin());
+}
+//sourcemap config
+if (isProd) {
+    exports.devtool = 'source-map';
+} else {
+    exports.devtool = 'eval';
 }
 
 module.exports = exports;
