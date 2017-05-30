@@ -6,7 +6,7 @@ import bulbasaur from './images/bulbasaur.jpg';
 
 ReactDOM.render(
     <div>
-        <h1>Hello, app page!</h1>
+        <h1>bulbasaur</h1>
         <img src={bulbasaur} />
     </div>,
     document.getElementById('root')
